@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@Controller
+@Controller  //얘는 어쨌든 스프링이 관리. 컴포넌트 스캔으로 올라간다.
 public class HelloController {
 
     //여기에서의 get은 get/post의 get이다. 메소드로서의 get

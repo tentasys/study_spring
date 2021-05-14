@@ -9,16 +9,16 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service  //스프링이 올라올 때 아래의 애를 스프링 컨테이너에 서비스를 등록해 준다.
+//@Service  //스프링이 올라올 때 아래의 애를 스프링 컨테이너에 서비스를 등록해 준다.
 public class MemberService {
 
     private final MemberRepository memberRepository;
 
     //직접 생성하는 것이 아니라 외부에서 넣게끔 변경입 -> Dependency Injection
-    @Autowired
+    //@Autowired
     //memberservice는 memberrepository가 필요하다.
     public MemberService(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
+        this.memberRepository = memberRepository;   //생성자 주입
     }
 
     //회원 가입
