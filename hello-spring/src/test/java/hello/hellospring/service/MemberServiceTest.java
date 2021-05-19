@@ -10,6 +10,10 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+//이 테스트는 DB 및 스프링과 연동되지 않은 순수한 자바 코드 -> 단위 테스트
+//자바 코드로 하면서 최소한의 단위로 하는 것
+//순수한 자바 테스트가 훨씬 좋은 테스트 일 확률이 높다 -> 단위로 쪼개서 테스트
+//스프링 컨테이너 없이 테스트를 짤 수 있도록 해야 한다.
 class MemberServiceTest {
 
     //MemberService memberService = new MemberService();
