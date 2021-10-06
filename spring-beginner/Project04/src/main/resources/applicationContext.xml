@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 내가 사용하고자 하는 네임스페이스. 대부분의 applicationContext파일의 구조는 이러한 형태를 띄고 있다. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+		
+	<!-- 이 부분은 내가 사용할 코드를 적어야 함  -->
+	<!-- id속성 : 개발자가 직접 중요. 클래스는 패키지명과 클래스명을(풀네임) 명시해야 함  -->
+	<!-- 이 클래스로부터 객체를 사용하기 위한 방법 : new 키워드를 이용해서 사용하는 것이 아니라 태그에 의해 자동으로 객체가 생성됨(메모리 로딩) -->
+	<bean id="tWalk" class="Project03.TransportationWalk" />
+</beans>
