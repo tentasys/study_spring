@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+		
+	<!-- 세번째 파일 분리 : info 정보들을 설정 파일로 분리  -->
+	<bean id="informationService" class="ems.member.service.EMSInformationService">
+		<property name="info">
+			<value>Education Management System program was developed in 2021.</value>
+		</property>
+		<property name="copyRight">
+			<value>COPYRIGHT(C) 2015 EMS CO., LTD. ALL RIGHT RESERVED. CONTACT MASTER FOR MORE INFORMATION.</value>
+		</property>
+		<property name="ver">
+			<value>The version is 1.0</value>
+		</property>
+		<property name="sYear">
+			<value>2015</value>
+		</property>
+		<property name="sMonth">
+			<value>1</value>
+		</property>
+		<property name="sDay">
+			<value>1</value>
+		</property>
+		<property name="eYear" value="2015"></property>
+		<property name="eMonth" value="2"></property>
+		<property name="eDay" value="28"></property>
+		
+		<!-- 파라미터로 리스트가 들어와야 할 때 리스트 태그를 이용해서 넣을 수 있다.  -->
+		<property name="developers">
+			<list>
+				<value>Cheney.</value>
+				<value>Eloy.</value>
+				<value>Jasper.</value>
+				<value>Dilon.</value>
+				<value>Kian.</value>
+			</list>
+		</property>
+		
+		<!-- Map 타입 객체 주입  -->
+		<property name="administrators">
+			<map>
+				<entry>
+					<key>
+						<value>Cheney</value>
+					</key>
+					<value>cheney@springPjt.org</value>
+				</entry>
+				<entry>
+					<key>
+						<value>Jasper</value>
+					</key>
+					<value>jasper@springPjt.org</value>
+				</entry>
+			</map>
+		</property>
+		
+		<property name="dbInfos">
+			<map>
+				<entry>
+					<key>
+						<value>dev</value>
+					</key>
+					<!-- value에 해당하는것이 객체. 레퍼런스로 위에 있는 객체를 통째로 주입한다.  -->
+					<ref bean="dataBaseConnectionInfoDev"/>
+				</entry>
+				<entry>
+					<key>
+						<value>real</value>
+					</key>
+					<ref bean="dataBaseConnectionInfoReal"/>
+				</entry>
+			</map>
+		</property>
+	</bean>
+</beans>

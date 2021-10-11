@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 서로 의존관계에 있는 두 객체  -->
+	<!-- 주입해주는 객체  -->
+	<bean id="injectionBean" class="scope.ex.InjectionBean" />
+	<!-- 의존받는 객체  -->
+	<bean id="dependencyBean" class="scope.ex.DependencyBean" scope="prototype">
+		<!-- 생성자에서 주입  -->
+		<constructor-arg ref ="injectionBean" />
+		<property name="injectionBean" ref="injectionBean"/>
+	</bean>
+
+</beans>

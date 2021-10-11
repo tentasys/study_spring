@@ -9,7 +9,7 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 
 import ems.member.Student;
 import ems.member.service.EMSInformationService;
-import ems.member.assembler.StudentAssembler;
+//import ems.member.assembler.StudentAssembler;
 import ems.member.service.StudentAllSelectService;
 import ems.member.service.StudentModifyService;
 import ems.member.service.StudentRegisterService;
@@ -42,7 +42,13 @@ public class MainClass {
 		//학생 정보를 가지고 학생 한명마다 객체화 시키는 클래스 
 		//StudentAssembler assembler = new StudentAssembler();
 		//이 한 줄로 모든 객체 생성과 의존 주입이 끝남 
-		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationContext.xml");
+		//컨테이너 생성 getbean을 이용해 원하는 객체를 가져다가 사용함. 
+		//분리한 설정 파일을 통해 스프링 컨테이너를 만든다. 
+		String appCtxs[] = {"classpath:appCtx1.xml", "classpath:appCtx2.xml", "classpath:appCtx3.xml"};	//배열 형태로 넣으면 여러 개의 파일을 동시에 사용 가능 
+		//GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationContext.xml");
+//		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext(appCtxs);
+		//import한 설정파일 사용 
+		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("classpath:appCtxImport.xml");
 		
 		EMSInformationService informationService = ctx.getBean("informationService", EMSInformationService.class);
 		informationService.outputEMSInformation();
