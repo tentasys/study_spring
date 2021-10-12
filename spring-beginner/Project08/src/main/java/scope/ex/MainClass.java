@@ -5,7 +5,7 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 public class MainClass {
 
 	public static void main(String[] args) {
-		//스프링 설정 파일을 이용한 스프링 컨테이너 생성 
+		//스프링 설정 파일을 이용한 스프링 컨테이너 생성  
 		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationContext.xml");
 
 		InjectionBean injectionBean = ctx.getBean("injectionBean", InjectionBean.class);
