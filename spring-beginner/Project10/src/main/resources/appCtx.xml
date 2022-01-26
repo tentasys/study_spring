@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+		
+	<bean id="bookDao" class="com.bms.book.dao.BookDao" />
+	<bean id="bookRegisterService" class="com.bms.book.service.BookRegisterService" />
+	<bean id="bookSearchService" class="com.bms.book.service.BookSearchService" />
+
+	<bean id="memberDao" class="com.bms.member.dao.MemberDao" />
+	<bean id="memberRegisterService" class="com.bms.member.service.MemberRegisterService" />
+	<bean id="memberSearchService" class="com.bms.member.service.MemberSearchService" />
+</beans>
