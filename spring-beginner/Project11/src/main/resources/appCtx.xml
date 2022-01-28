@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:security="http://www.springframework.org/schema/security"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd"
+
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+		
+	<!-- annotaion 사용하려면 이게 있어야 함. 컨테이너에서 빈 객체를 만들고 autowired를 통해 조립한다. -->
+	<context:annotation-config />
+	
+	<bean id="bookDao" class="com.bms.book.dao.BookDao" />
+	<bean id="bookRegisterService" class="com.bms.book.service.BookRegisterService" />
+	<bean id="bookSearchService" class="com.bms.book.service.BookSearchService" />
+
+	<bean id="memberDao" class="com.bms.member.dao.MemberDao" />
+	<bean id="memberRegisterService" class="com.bms.member.service.MemberRegisterService" 
+		init-method="initMethod" destroy-method="destroyMethod"/>
+	<bean id="memberSearchService" class="com.bms.member.service.MemberSearchService" />
+</beans>

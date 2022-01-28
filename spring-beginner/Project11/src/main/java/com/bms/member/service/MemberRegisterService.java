@@ -15,4 +15,12 @@ public class MemberRegisterService {
 	public void register(Member member) {
 		memberDao.insert(member);
 	}
+	
+	public void initMethod() {
+		System.out.println(" -- initMethod() -- ");
+	}
+	
+	public void destroyMethod() {
+		System.out.println(" -- destroyMethod() -- ");
+	}
 }
