@@ -9,6 +9,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import ems.member.configuration.MemberConfig;
+import ems.member.configuration.MemberConfig1;
+import ems.member.configuration.MemberConfig2;
+import ems.member.configuration.MemberConfig3;
 import ems.member.service.EMSInformationService;
 import ems.member.service.StudentAllSelectService;
 import ems.member.service.StudentModifyService;
@@ -42,7 +45,11 @@ public class MainClassUseConfiguration {
 		//xml 이용 코드 
 //		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("classpath:applicationContext.xml");
 		//java파일 이용 코드 
-		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MemberConfig.class);
+//		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MemberConfig.class);
+		//설정 파일 분리
+//		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MemberConfig1.class, MemberConfig2.class, MemberConfig3.class);
+		//분리된 설정파일을 하나로 합쳐서 사용 
+		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MemberConfig1.class);
 		
 		EMSInformationService informationService = ctx.getBean("informationService", EMSInformationService.class);
 		informationService.outputEMSInformation();
