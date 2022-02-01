@@ -1,14 +1,20 @@
 package com.bs.Project17.member.controller;
 
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bs.Project17.member.Member;
 import com.bs.Project17.member.service.MemberService;
@@ -28,7 +34,8 @@ public class MemberController {
 	//POST로 Request를 했는데 controller에 post method가 없을 경우 -> 찾다가 없으면 동명의 GET Method를 찾는다.
 	@RequestMapping(value="/memJoin", method=RequestMethod.POST)	//RequestMethod는 기본값이 GET이므로 명시할 필요가 없다.
 //	public String memJoin(Model model, HttpServletRequest request) {
-	public String memJoin(Member member) {		//사용자가 정보를 날리면 setter가 작동하여 사용자가 입력한 값이 객체의 프로퍼티로 들어간다.
+	//public String memJoin(Member member) {		//사용자가 정보를 날리면 setter가 작동하여 사용자가 입력한 값이 객체의 프로퍼티로 들어간다.
+	public String memJoin(@ModelAttribute("mem") Member member) {			//뷰단에서 다른 닉네임으로 커맨드 객체를 사용하고자 할 때 -> java단에서는 그대로 Member를 사용하지만 view단에서는 닉네임 사용 
 //		String memId = request.getParameter("memId");
 //		String memPw = request.getParameter("memPw");
 //		String memMail = request.getParameter("memMail");
@@ -37,6 +44,8 @@ public class MemberController {
 //		String memPhone3 = request.getParameter("memPhone3");
 		
 //		service.memberRegister(memId, memPw, memMail, memPhone1, memPhone2, memPhone3);
+		
+		//아래의 코드 : 커맨드 객체 사용 
 		service.memberRegister(member.getMemId(), member.getMemPw(), member.getMemMail(), member.getMemPhone1(), member.getMemPhone2(), member.getMemPhone3());
 		
 //		model.addAttribute("memId", memId);
@@ -71,4 +80,39 @@ public class MemberController {
 		return "memLoginOK";
 	}
 	
+	@RequestMapping(value="/memRemove", method = RequestMethod.POST)
+	public String memRemove(@ModelAttribute("mem") Member member) {
+		
+		service.memberRemove(member);
+		
+		return "memRemoveOK";
+	}
+	
+	@RequestMapping(value="/memModify", method = RequestMethod.POST)
+	public ModelAndView memModify(Member member) {
+		
+		Member[] members = service.memberModify(member);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		//데이터 추가 
+		mav.addObject("memBef", members[0]);
+		mav.addObject("memAft", members[1]);
+		
+		//뷰의 이름 추가 
+		mav.setViewName("memModifyOK");
+		
+		return mav;
+	}
+	
+	//메소드 위에 modelattribute 를 주고 나면 view단에서 메소드를 바로 사용할 수 있다. 
+	//어떠한 url로 호출되던지간에 modelattribute로 준 값이 공통적으로 실행이 된다. 
+	@ModelAttribute("serverTime")
+	public String getServerTime(Locale locale) {
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		return dateFormat.format(date);
+	}
 }

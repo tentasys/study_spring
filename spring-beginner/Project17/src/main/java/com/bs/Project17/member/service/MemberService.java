@@ -43,13 +43,18 @@ public class MemberService implements IMemberService {
 	}
 
 	@Override
-	public void memberModify() {
+	public Member[] memberModify(Member member) {
 		
+		Member[] ret = new Member[2];
+		ret[0] = member;
+		ret[1] = member;
+		
+		return ret;
 	}
 
 	@Override
-	public void memberRemove() {
-		
+	public void memberRemove(Member member) {
+		dao.memberDelete(member.getMemId());
 	}
 
 }

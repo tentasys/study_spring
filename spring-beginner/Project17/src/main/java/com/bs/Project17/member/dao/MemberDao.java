@@ -65,8 +65,8 @@ public class MemberDao implements IMemberDao {
 	}
 
 	@Override
-	public void memberDelete() {
-
+	public void memberDelete(String memId) {
+		dbMap.remove(memId);
 	}
 
 }
