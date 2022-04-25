@@ -20,7 +20,7 @@ public class OrderApp {
         Member member = new Member(memberId, "memberA", Grade.VIP);
         memberService.join(member);     //생성한 회원을 회원 저장소에 넣어야지 나중에 찾아 쓸 수 있음
 
-        Order order = orderService.createOrder(memberId, "itemA", 10000);
+        Order order = orderService.createOrder(memberId, "itemA", 20000);
 
         System.out.println("order = " + order);
         System.out.println("order.calculatePrice = " + order.calculatePrice());
