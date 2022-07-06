@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--appConfig.class가 아닌 xml로 스프링 설정하는 방법-->
+<!--폴더 오른쪽 클릭 > xml configuration - spring config로 생성-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="memberService" class="hello.core.member.MemberServiceImpl">
+<!--        생성자 필요-->
+        <constructor-arg name="memberRepository" ref="memberRepository"></constructor-arg>
+<!--        이것만 해서는 memberRepository가 없으므로 아래에서 bean 등록을 해 주어야 한다.-->
+    </bean>
+
+    <bean id="memberRepository" class="hello.core.member.MemoryMemberRepository"></bean>
+
+    <bean id="orderService" class="hello.core.order.OrderServiceImpl">
+        <constructor-arg name="memberRepository" ref="memberRepository"></constructor-arg>
+        <constructor-arg name="discountPolicy" ref="discountPolicy"></constructor-arg>
+    </bean>
+
+    <bean id="discountPolicy" class="hello.core.discount.RateDiscountPolicy"></bean>
+</beans>
