@@ -6,7 +6,10 @@ import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderServiceImpl implements OrderService{
 
     //회원 찾아야 한다
@@ -20,6 +23,7 @@ public class OrderServiceImpl implements OrderService{
     private final MemberRepository memberRepository;    //final은 기본으로 할당되거나 생성자로 반드시 할당되어야 함
     //구체적인 클래스가 아니라 철저한 인터페이스에 의존!
 
+    @Autowired
     public OrderServiceImpl(DiscountPolicy discountPolicy, MemberRepository memberRepository) {
         this.discountPolicy = discountPolicy;
         this.memberRepository = memberRepository;
@@ -31,5 +35,10 @@ public class OrderServiceImpl implements OrderService{
         int discountPrice = discountPolicy.discount(member, itemPrice); //orderservice 입장에서는 할인의 동작 방법을 모른다. 설계를 위임함. -> 단일 책임 원칙이 잘 지켜진다.
 
         return new Order(memberId, itemName, itemPrice, discountPrice);
+    }
+
+    //test용
+    public MemberRepository getMemberRepository() {
+        return memberRepository;
     }
 }
