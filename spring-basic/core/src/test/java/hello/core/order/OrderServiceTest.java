@@ -33,4 +33,12 @@ public class OrderServiceTest {
         Order order = orderService.createOrder(memberId, "itemA", 10000);
         Assertions.assertThat(order.getDiscountPrice()).isEqualTo(1000);
     }
+
+//    @Test
+//    void fieldInjectionTest(){
+//        OrderServiceImpl orderService = new OrderServiceImpl();
+//        orderService.createOrder(1L, "itemA", 10000);
+//        //객체 생성은 되었는데 주입은 안되어서 createOrder가 되지 않음 -> 결국 setter를 열어야 한다.
+//        //MemoryMemberRepository / discountpolicy가 없어서 오류가 난다.
+//    }
 }

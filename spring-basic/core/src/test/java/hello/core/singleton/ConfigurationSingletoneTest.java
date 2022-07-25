@@ -19,6 +19,8 @@ public class ConfigurationSingletoneTest {
 
         //원래는 구체타입으로 꺼내는 것은 지양해야 하는데, 테스트 용이므로 구체 타입으로 꺼내자.
         MemberServiceImpl memberService = ac.getBean("memberService", MemberServiceImpl.class);
+        //org.springframework.beans.factory.BeanNotOfRequiredTypeException: Bean named 'orderService' is expected to be of type 'hello.core.order.OrderServiceImpl' but was actually of type 'org.springframework.beans.factory.support.NullBean'
+        //생성할 때 생긴 문제가 아니라 빈을 가져올 때 생긴 문제
         OrderServiceImpl orderService = ac.getBean("orderService", OrderServiceImpl.class);
         MemberRepository memberRepository = ac.getBean("memberRepository", MemberRepository.class);
 
