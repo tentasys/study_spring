@@ -1,15 +1,20 @@
 package hello.core.order;
 
+import hello.core.annotation.MainDiscountPolicy;
 import hello.core.discount.DiscountPolicy;
 import hello.core.discount.FixDiscountPolicy;
 import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
+//lombok 적용
+//@RequiredArgsConstructor //현재 내 객체의 final이 붙은 값에 대한 생성자를 만들어준다.
 public class OrderServiceImpl implements OrderService{
 
     //회원 찾아야 한다
@@ -19,8 +24,8 @@ public class OrderServiceImpl implements OrderService{
     //private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
 
     //인터페이스에만 의존하도록 아래와 같이 코드 변경
-    private DiscountPolicy discountPolicy;  //구체화가 아닌 추상화에 의존.
-    private MemberRepository memberRepository;    //final은 기본으로 할당되거나 생성자로 반드시 할당되어야 함 -> final인데 생성자에서 할당이 안된다? -> 컴파일 오류가 발생
+    private final DiscountPolicy discountPolicy;  //구체화가 아닌 추상화에 의존.
+    private final MemberRepository memberRepository;    //final은 기본으로 할당되거나 생성자로 반드시 할당되어야 함 -> final인데 생성자에서 할당이 안된다? -> 컴파일 오류가 발생
     //구체적인 클래스가 아니라 철저한 인터페이스에 의존!
 
     //------- 수정자 주입(setter) --------
@@ -40,18 +45,19 @@ public class OrderServiceImpl implements OrderService{
     //----------------------------------
 
     @Autowired //어? autowired가 있네? -> discountpolicy, memberepository를 꺼내서 넣어줌
-    public OrderServiceImpl(DiscountPolicy discountPolicy, MemberRepository memberRepository) {
-        System.out.println("1. OrderServiceImpl.OrderServiceImpl");
+    //Lombok에 의해 자동 생성되므로 이거 없어도 된다.
+    public OrderServiceImpl(@MainDiscountPolicy DiscountPolicy discountPolicy, MemberRepository memberRepository) {
+      //  System.out.println("1. OrderServiceImpl.OrderServiceImpl");
         this.discountPolicy = discountPolicy;
         this.memberRepository = memberRepository;
     }
 
     //일반 메소드 의존관계 주입
-    @Autowired
-    public void init(MemberRepository memberRepository, DiscountPolicy discountPolicy){
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
-    }
+//    @Autowired
+//    public void init(MemberRepository memberRepository, DiscountPolicy discountPolicy){
+//        this.memberRepository = memberRepository;
+//        this.discountPolicy = discountPolicy;
+//    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
