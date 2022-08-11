@@ -20,6 +20,8 @@ public class BeanLifeCycleTest {
 
     @Configuration
     static class LifeCycleConfig {
+
+        // @Bean(initMethod = "init", destroyMethod = "close") //destroyMethod = "(inferred)" 이렇게 잡혀 있다
         @Bean
         public NetworkClient networkClient() {
             NetworkClient networkClient = new NetworkClient();
